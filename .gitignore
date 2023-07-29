@@ -1,0 +1,3 @@
+**/*.terraform
+**/.terraform*
+simple-webapp-kubernetes-terraform/.terraform.lock.hcl
