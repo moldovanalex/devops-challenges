@@ -1,34 +1,33 @@
-name: CI for simple-docker-fullstack-app
+name: CI/CD Pipeline for simple-docker-fullstack-app
 
 on:
   push:
     paths:
       - "simple-docker-fullstack-app/**"
-    branches:
-      - main
   pull_request:
     paths:
       - "simple-docker-fullstack-app/**"
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
-  build:
+  build-and-test:
     runs-on: ubuntu-latest
-    strategy:
-      matrix:
-        node-version: [14.x]
+
     steps:
-      - name: Checkout repo
+      - name: Checkout code
         uses: actions/checkout@v2
 
-      - name: Set up Node.js ${{ matrix.node-version }}
+      - name: Setup Node.js
         uses: actions/setup-node@v2
         with:
-          node-version: ${{ matrix.node-version }}
+          node-version: "14"
 
       - name: Install dependencies
-        run: cd simple-docker-fullstack-app && npm ci
+        run: |
+          cd simple-docker-fullstack-app
+          npm install
 
       - name: Run tests
-        run: cd simple-docker-fullstack-app && npm test
+        run: |
+          cd simple-docker-fullstack-app
+          npm test
