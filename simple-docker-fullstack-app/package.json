@@ -1,8 +1,18 @@
 {
-  "name": "docker-fullstack-app",
-  "version": "0.1.0",
+  "name": "simple-docker-fullstack-app",
+  "version": "1.0.0",
+  "description": "A consolidated package.json for a simple Docker fullstack app",
   "private": true,
+  "workspaces": [
+    "docker-fullstack-app",
+    "server",
+    "tests"
+  ],
   "dependencies": {
+    "body-parser": "^1.20.2",
+    "cors": "^2.8.5",
+    "express": "^4.18.2",
+    "sqlite3": "^5.1.6",
     "@testing-library/jest-dom": "^5.17.0",
     "@testing-library/react": "^13.4.0",
     "@testing-library/user-event": "^13.5.0",
@@ -12,10 +22,15 @@
     "react-scripts": "5.0.1",
     "web-vitals": "^2.1.4"
   },
+  "devDependencies": {
+    "chai": "^4.3.7",
+    "mocha": "^10.2.0",
+    "supertest": "^6.3.3"
+  },
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test",
+    "test": "mocha --exit tests/*.spec.js",
     "eject": "react-scripts eject"
   },
   "eslintConfig": {

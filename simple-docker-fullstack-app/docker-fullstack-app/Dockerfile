@@ -2,7 +2,7 @@ FROM node:14 as build
 WORKDIR /usr/src/app
 COPY package*.json ./
 RUN npm install
-COPY . .
+COPY docker-fullstack-app/ ./
 RUN npm run build
 
 FROM nginx:stable-alpine

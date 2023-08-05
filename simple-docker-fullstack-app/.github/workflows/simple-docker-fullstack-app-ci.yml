@@ -1,0 +1,34 @@
+name: CI for simple-docker-fullstack-app
+
+on:
+  push:
+    paths:
+      - "simple-docker-fullstack-app/**"
+    branches:
+      - main
+  pull_request:
+    paths:
+      - "simple-docker-fullstack-app/**"
+    branches:
+      - main
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [14.x]
+    steps:
+      - name: Checkout repo
+        uses: actions/checkout@v2
+
+      - name: Set up Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v2
+        with:
+          node-version: ${{ matrix.node-version }}
+
+      - name: Install dependencies
+        run: cd simple-docker-fullstack-app && npm ci
+
+      - name: Run tests
+        run: cd simple-docker-fullstack-app && npm test

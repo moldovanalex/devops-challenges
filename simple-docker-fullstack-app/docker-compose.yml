@@ -2,8 +2,8 @@ version: "3"
 services:
   client:
     build:
-      context: ./docker-fullstack-app
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: docker-fullstack-app/Dockerfile
     volumes:
       - ./docker-fullstack-app:/usr/src/app
       - /usr/src/app/node_modules
@@ -13,12 +13,13 @@ services:
       - REACT_APP_API_URL=http://server:8000
     depends_on:
       - server
+
   server:
     build:
-      context: ./server
-      dockerfile: Dockerfile
+      context: .
+      dockerfile: server/Dockerfile
     volumes:
-      - ./server:/usr/src/app
+      - ./server:/usr/src/app/server
       - /usr/src/app/node_modules
     ports:
       - 8000:8000
